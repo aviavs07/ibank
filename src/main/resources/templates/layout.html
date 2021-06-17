@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - API Dashboard</title>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendors/chartjs/Chart.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendors/perfect-scrollbar/perfect-scrollbar.css}">
+
+    <link rel="stylesheet" th:href="@{/assets/css/choices.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/app.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+    <!-- Custom Scripts For this page -->
+    <th:block layout:fragment="styles">
+        <link rel="stylesheet" th:href="@{/assets/js/datatable/css/jquery.dataTables.min.css}" />
+        <link rel="stylesheet" th:href="@{/assets/js/datatable/css/buttons.dataTables.min.css}" />
+
+        <link rel="stylesheet" th:href="@{/assets/css/bootstrap-datepicker.min.css}" />
+    </th:block>
+
+    <!-- Custom Styles For the module -->
+    <th:block layout:fragment="styles"></th:block>
+
+    <link rel="stylesheet" th:href="@{/assets/css/switch.css}">
+
+    <!--sweetalert2 css file -->
+    <link rel="stylesheet" th:href="@{/assets/css/sweetalert2.min.css}">
+
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.svg}" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <div th:replace="~{layouts/parts/sidebar :: sidbar}">
+            <!-- Sidebar Content-->
+        </div>
+        <div id="main">
+            <div th:replace="~{layouts/parts/header :: header}">
+                <!-- Header Content-->
+            </div>
+
+            <div class="main-content container-fluid">
+                <div class="page-title" layout:fragment="heading">
+                    <!-- Heeading Title in Main Content-->
+                </div>
+                <hr />
+                <section class="section" layout:fragment="content">
+                    <!-- Page Main Content Will Goes Here ! -->
+                </section>
+            </div>
+            <div th:replace="~{layouts/parts/footer :: footer}">
+                <!-- Footer Content-->
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/assets/js/jquery-3.5.1.min.js}"></script>
+    <script th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
+
+
+    <script type="text/javascript" th:src="@{/assets/js/datatable/js/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/datatable/js/dataTables.buttons.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/datatable/js/buttons.html5.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/datatable/js/jszip.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/datatable/js/pdfmake.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/datatable/js/vfs_fonts.js}"></script>
+
+    <script type="text/javascript" th:src="@{/assets/js/bootstrap-datepicker.min.js}"></script>
+
+    <script th:src="@{/assets/js/feather-icons/feather.min.js}"></script>
+
+    <!-- Custom Scripts For the module -->
+    <th:block layout:fragment="script"></th:block>
+    <script th:src="@{/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
+
+    <script th:src="@{/assets/js/app.js}"></script>
+    <script th:src="@{/assets/js/main.js}"></script>
+    <script th:src="@{/assets/js/custom-script.js}"></script>
+    <script th:src="@{/assets/js/sweetalert2.all.min.js}"></script>
+
+    <script th:src="@{/assets/js/choices.min.js}"></script>
+
+    <!-- Custom Scripts For this page -->
+    <th:block layout:fragment="script">
+        <script>
+            $(document).ready(function () {
+
+                var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+                    removeItemButton: true,
+                    maxItemCount: 5,
+                    searchResultLimit: 5,
+                    renderChoiceLimit: 5
+                });
+
+                $('.datepicker').datepicker({
+                    format: "yyyy-mm-dd",
+                    autoclose: true
+                });
+
+                $('.datatable').DataTable({
+                    "aaSorting": [0],
+                    keys: true,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ]
+                });
+            });
+        </script>
+    </th:block>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="shahadat hossain" />
+	<title>Resource/Service Details</title>
+</head>
+
+<body>
+	<div layout:fragment="heading">
+		<h4>
+			Service : : <span th:text="${data.getEntity.resourceName}"></span>
+		</h4>
+	</div>
+	<div layout:fragment="content">
+		<div class="row mb-2">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-content">
+						<div class="card-body">
+							<div class="row my-2">
+								<div class="col-md-2">
+									<label>Resource Name</label>
+								</div>
+								<div class="col-md-10">
+									: <span th:text="${data.getEntity.resourceName}"></span>
+								</div>
+
+								<div class="col-md-2">
+									<label>Entry At</label>
+								</div>
+								<div class="col-md-10">
+									: <span th:text="${data.getEntity.createdDate}"></span>
+								</div>
+
+								<div class="col-md-2">
+									<label>Entry By</label>
+								</div>
+								<div class="col-md-10">
+									: <span th:text="${data.getCreatedByUser}"></span>
+								</div>
+								<div class="col-md-2">
+									<label>Entry At</label>
+								</div>
+								<div class="col-md-10">
+									: <span th:text="${data.getEntity.updatedDate}"></span>
+								</div>
+
+								<div class="col-md-2">
+									<label>Updated By</label>
+								</div>
+								<div class="col-md-10">
+									: <span th:text="${data.getUpdatedByUser}"></span>
+								</div>
+								<div class="col-md-2">
+									<label></label>
+								</div>
+								<div class="col-md-2 btn-group" role="group" aria-label="Basic example">
+									<a class=" p-1 text-info"
+										th:href="@{/resources/history/{id}(id = ${data.getEntity.resourceId})}"> <i
+											data-feather="eye"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="card-footer">
+
+							<div class="form-actions mt-2 d-flex justify-content-center">
+
+								<a sec:authorize="hasAnyAuthority('ADMIN')" class="btn btn-info mr-1"
+									th:href="@{/resources/{id}/edit(id = ${data.getEntity.resourceId})}"> <i
+										data-feather="edit"></i>
+								</a> <a th:href="@{/resources}" class="btn btn-primary mr-1"><i
+										data-feather="corner-down-left"></i> </a>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

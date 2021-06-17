@@ -1,0 +1,53 @@
+<div th:fragment="header" id="header" class='active'>
+    <nav class="navbar navbar-header navbar-expand navbar-light">
+        <a class="sidebar-toggler" href="#"><span class="navbar-toggler-icon"></span></a>
+        <button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- <h5 class="ml-2">
+            Current Date : <span class="text-info" th:text="${#dates.format(#dates.createNow(),'dd-MM-YYYY')}"></span>
+        </h5> -->
+            <!-- <h6>Your IP Address: <span th:text="${clientIp}"></span></h6> -->
+            <div class="row justify-content-center col-10">
+                <div class="alert alert-success animate__animated animate__fadeOut animate__delay-2s col-4" role="alert"
+                    th:text="${success}" th:if="${success}"></div>
+                <div class="alert alert-info animate__animated animate__fadeOut animate__delay-2s col-4" role="alert"
+                    th:text="${update}" th:if="${update}"></div>
+                <div class="alert alert-light-warning animate__animated animate__fadeOut animate__delay-2s col-4"
+                    role="alert" th:text="${delete}" th:if="${delete}"></div>
+                <div class="alert alert-danger animate__animated animate__fadeOut animate__delay-2s col-4" role="alert"
+                    th:text="${error}" th:if="${error}"></div>
+            </div>
+            <div class="row justify-content-center col-2">
+                <ul class="navbar-nav d-flex align-items-center navbar-light ml-auto">
+
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <div class="avatar mr-1">
+                                <!-- <img th:src="@{/assets/images/avatar/avatar-s-1.png}" alt=""> -->
+                            </div>
+                            <div class="d-none d-md-block d-lg-inline-block">Hi,
+                                [[${#request.userPrincipal.principal.fullName}]]</div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i data-feather="user"></i>
+                                Account</a> <a class="dropdown-item" href="#"><i data-feather="settings"></i>
+                                Settings</a>
+                            <div class="dropdown-divider"></div>
+
+                            <form th:action="@{/logout}" method="post">
+                                <button type="submit" class="dropdown-item" href="#">
+                                    <i data-feather="log-out"></i> Logout
+                                </button>
+                            </form>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

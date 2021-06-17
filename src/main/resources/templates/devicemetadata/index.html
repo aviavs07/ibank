@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+
+</head>
+
+<body>
+
+    <div layout:fragment="heading">
+        <h4>Device Meta Data Information</h4>
+    </div>
+
+    <div layout:fragment="content">
+        <div class="row mb-2 mt-2">
+            <div class="col-12 ">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body table-responsive">
+                            <table class="table table-sm table-striped  table-bordered text-center datatable">
+                                <thead class="bg-info text-white ">
+                                    <tr>
+                                        <th>Device Details</th>
+                                        <th>Last Logged In</th>
+                                        <th>Location</th>
+                                        <th>JWT User</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="data : ${listDeviceMetadata}">
+                                        <tr>
+                                            <td>[[${data.entity.deviceDetails}]]</td>
+                                            <td>[[${data.entity.location}]]</td>
+                                            <td>[[${data.entity.location}]]</td>
+                                            <!--                                             
+                                            <td class="text-center">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <a class=" p-1 text-info" th:href="@{/companies/{id}(id = ${companyWrappers.entity.companyId})}">
+                                                        <i data-feather="eye"></i>
+                                                    </a>
+                                                    <a sec:authorize="hasAnyAuthority('ADMIN')" class="p-1 text-warning" th:href="@{/companies/{id}/edit(id = ${companyWrappers.entity.companyId})}">
+                                                        <i data-feather="edit"></i>
+                                                    </a>
+                                                </div>
+                                            </td> -->
+                                        </tr>
+                                    </th:block>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

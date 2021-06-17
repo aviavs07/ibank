@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="dashboard/user-management">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Avijit Saha" />
+
+</head>
+
+<body>
+    <div layout:fragment="usermanagement">
+        <div class="row mb-1">
+            <div class="col-12" sec:authorize="hasAnyAuthority('ADMIN', 'CREATOR')">
+                <a class="btn btn-warning round float-right btn-sm" th:href="@{/useraccounts/new}">User <i
+                        data-feather="user-plus" width="20"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row mb-2 mt-2">
+            <div class="col-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-decoration-underline">User Account List</h4>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-sm table-striped  table-bordered text-center datatable">
+                            <thead class="bg-info text-white ">
+                                <tr>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Bank ID</th>
+                                    <th>Enabled</th>
+                                    <th>2FA</th>
+                                    <th>Secret</th>
+                                    <th>Role</th>
+                                    <th>Creator</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <th:block th:each="userWrappers : ${listUserAccount}">
+                                    <tr>
+                                        <td>[[${userWrappers.entity.firstName}+' '+${userWrappers.entity.lastName}]]
+                                        </td>
+                                        <td>[[${userWrappers.entity.userEmail}]]</td>
+                                        <td>[[${userWrappers.entity.userBankId}]]</td>
+                                        <td class="font-weight-bold">
+                                            <i class="text-success " th:if="${userWrappers.entity.enabled}"
+                                                data-feather="check"></i>
+                                            <i class="text-danger" th:unless="${userWrappers.entity.enabled == true}"
+                                                data-feather="x"></i>
+                                        </td>
+                                        <td class="font-weight-bold">
+                                            <i class="text-success" th:if="${userWrappers.entity.isUsing2fa}"
+                                                data-feather="check"></i>
+                                            <i class="text-danger" th:unless="${userWrappers.entity.isUsing2fa == true}"
+                                                data-feather="x"></i>
+                                        </td>
+                                        <td>[[${userWrappers.entity.secret}]]</td>
+                                        <td>[[${userWrappers.entity.roles}]]</td>
+                                        <td>[[${userWrappers.createdByUser}]]</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a class=" p-1 text-info"
+                                                    th:href="@{/useraccounts/{id}(id = ${userWrappers.entity.userId})}">
+                                                    <i data-feather="eye"></i>
+                                                </a>
+                                                <a sec:authorize="hasAnyAuthority('ADMIN')" class=" p-1 text-warning"
+                                                    th:href="@{/useraccounts/{id}/edit(id = ${userWrappers.entity.userId})}">
+                                                    <i data-feather="edit"></i>
+                                                </a>
+                                                <a sec:authorize="hasAnyAuthority('ADMIN')" class=" p-1 text-success"
+                                                    th:href="@{/useraccounts/{id}/password(id = ${userWrappers.entity.userId})}">
+                                                    <i th:if="${userWrappers.entity.accountNonLocked}"
+                                                        data-feather="unlock"></i>
+                                                    <i class="text-danger"
+                                                        th:unless="${userWrappers.entity.accountNonLocked == true}"
+                                                        data-feather="lock"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

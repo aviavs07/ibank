@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3881" height="1607" viewBox="0 0 3881 1607">
+  <defs>
+    <filter id="JBL_API" x="41" y="-6" width="3797" height="1135" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_5" x="682.691" y="1463.751" width="2709.865" height="26" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Dashboard" x="638" y="858" width="2799" height="628" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-Custom_Size_3">
+      <rect width="3881" height="1607"/>
+    </clipPath>
+  </defs>
+  <g id="Custom_Size_3" data-name="Custom Size – 3" clip-path="url(#clip-Custom_Size_3)">
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#JBL_API)">
+      <text id="JBL_API-2" data-name="JBL API" transform="translate(50 905)" fill="#0fa9ee" font-size="1000" font-family="Arial-BoldMT, Arial" font-weight="700"><tspan x="0" y="0">JBL</tspan><tspan y="0" fill="#707070"> </tspan><tspan y="0" fill="#eb1c91">API</tspan></text>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_5)">
+      <path id="Path_5-2" data-name="Path 5" d="M0,0H2691.865" transform="translate(691.69 1473.75)" fill="none" stroke="#a50896" stroke-width="8" stroke-dasharray="100 60"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Dashboard)">
+      <text id="Dashboard-2" data-name="Dashboard" transform="translate(647 1361)" fill="#616161" font-size="512" font-family="CenturyGothic, Century Gothic"><tspan x="0" y="0">Dashboard</tspan></text>
+    </g>
+  </g>
+</svg>

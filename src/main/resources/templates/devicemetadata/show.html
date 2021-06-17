@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Show DeviceMetadata</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1>Show DeviceMetadata</h1>
+		<hr />
+		<div class="form-group"> 
+			<label for="deviceDetails">DeviceDetails: </label>  
+			<span th:text="${data.getEntity.deviceDetails}"></span> 
+		</div> 
+		<div class="form-group"> 
+			<label for="lastLoggedIn">LastLoggedIn: </label>  
+			<span th:text="${data.getEntity.lastLoggedIn}"></span> 
+		</div> 
+		<div class="form-group"> 
+			<label for="location">Location: </label>  
+			<span th:text="${data.getEntity.location}"></span> 
+		</div> 
+		<div class="form-group"> 
+			<label for="jwtUser">JwtUser: </label>  
+			<span th:text="${data.getEntity.jwtUser}"></span> 
+		</div> 
+		<div class="col-md-2">
+			<label></label>
+		</div>
+		<div class="col-md-2 btn-group" role="group" aria-label="Basic example">
+			<a class=" p-1 text-info"
+				th:href="@{/devicemetadatas/history/{id}(id = ${data.getEntity.deviceId})}"> <i
+					data-feather="eye"></i>
+			</a>
+		</div>
+
+		<a th:href="@{/devicemetadatas/{id}/edit(id = ${data.getEntity.deviceId})}">Edit this record</a> <br/>
+		<a href="#">Delete this record</a> <br/>
+		<a th:href="@{/devicemetadatas}">Back to list DeviceMetadata</a> <br/>
+	</div>
+</body>
+</html>

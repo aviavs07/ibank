@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+
+</head>
+
+<body>
+
+    <div layout:fragment="heading">
+        <h4>Request Queue Information</h4>
+    </div>
+
+    <div layout:fragment="content">
+        <div class="row mb-2 mt-2">
+            <div class="col-12 ">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body table-responsive">
+                            <table class="table table-sm table-striped  table-bordered text-center datatable">
+                                <thead class="bg-info text-white ">
+                                    <tr>
+                                        <th>OFS Request</th>
+                                        <th>OFS Response</th>
+                                        <th>JWT User</th>
+                                        <th>Resource</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="requestqueue : ${listRequestQueue}">
+                                        <td th:text="${requestqueue.ofsRequest}"></td>
+                                        <td th:text="${requestqueue.ofsResponse}"></td>
+                                        <td th:text="${requestqueue.jwtUser}"></td>
+                                        <td th:text="${requestqueue.resource}"></td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a class=" p-1 text-info" th:href="@{/requestqueues/{id}(id = ${requestqueue.deviceId})}">
+                                                    <i data-feather="eye"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

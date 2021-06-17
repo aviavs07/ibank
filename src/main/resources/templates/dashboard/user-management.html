@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="Avijit Saha" />
+	<title>User Mangement</title>
+</head>
+
+<body>
+	<div layout:fragment="heading">
+		<h4>User Mangement</h4>
+		<p class="text-subtitle text-muted"></p>
+	</div>
+	<div layout:fragment="content">
+		<div class="col-sm-9 pb-4">
+			<ul class="nav nav-tabs nav-fill navbar-btn border-bottom">
+				<li class="nav-item rounded-top"><a class="nav-link "
+						th:classappend="${#httpServletRequest.getRequestURI().startsWith('/useraccounts') ? 'active':''}"
+						th:href="@{/useraccounts}">Users</a></li>
+				<li class="nav-item "><a class="nav-link "
+						th:classappend="${#httpServletRequest.getRequestURI().startsWith('/roles') ? 'active':''}"
+						th:href="@{/roles}">Roles</a></li>
+				<li class="nav-item "><a class="nav-link "
+						th:classappend="${#httpServletRequest.getRequestURI().startsWith('/serviceusers') ? 'active':''}"
+						th:href="@{/serviceusers}">Service Users</a></li>
+			</ul>
+		</div>
+		<section class="section" layout:fragment="usermanagement"></section>
+	</div>
+</body>
+
+</html>

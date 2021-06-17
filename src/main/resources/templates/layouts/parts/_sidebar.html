@@ -1,0 +1,61 @@
+<div th:fragment="sidbar" id="sidebar" class='active'>
+	<div class="sidebar-wrapper active">
+		<div class="sidebar-header">
+			<img th:src="@{/assets/images/logo.svg}" alt="">
+		</div>
+		<div class="sidebar-menu">
+			<ul class="menu">
+				<li class='sidebar-title'>Main Menu</li>
+				<li class="sidebar-item " 
+				th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}"
+				><a href=""
+					class='sidebar-link'> <i data-feather="home" width="20"></i> <span>Dashboard</span>
+				</a></li>
+
+				<li class="sidebar-item "
+				th:classappend="${#httpServletRequest.getRequestURI() == '/roles' ? 'active':''}"
+				><a th:href="@{/roles}"
+					class='sidebar-link'> <i data-feather="users" width="20"></i> <span>Role</span>
+				</a></li>
+
+				<li class="sidebar-item "
+				th:classappend="${#httpServletRequest.getRequestURI() == '/useraccounts' ? 'active':''}"
+				><a th:href="@{/useraccounts}"
+					class='sidebar-link'> <i data-feather="users" width="20"></i> <span>User</span>
+				</a></li>
+
+				<li class="sidebar-item "
+				th:classappend="${#httpServletRequest.getRequestURI() == '/resources' ? 'active':''}"
+				><a th:href="@{/resources}"
+					class='sidebar-link'> <i data-feather="users" width="20"></i> <span>Resource</span>
+				</a></li>
+
+				<li class="sidebar-item " th:classappend="${#httpServletRequest.getRequestURI() == '/companys' ? 'active':''}"><a th:href="@{/companys}"
+					class='sidebar-link'> <i data-feather="briefcase" width="20"></i>
+						<span>Company</span>
+				</a></li>
+
+				<li class="sidebar-item "
+				th:classappend="${#httpServletRequest.getRequestURI() == '/jwtusers' ? 'active':''}"
+				><a th:href="@{/jwtusers}"
+					class='sidebar-link'> <i data-feather="user" width="20"></i> <span>JWT
+							User</span>
+				</a></li>
+
+				<li class="sidebar-item " th:classappend="${#httpServletRequest.getRequestURI() == '/devicemetadatas' ? 'active':''}"><a th:href="@{/devicemetadatas}"
+					class='sidebar-link'> <i data-feather="monitor" width="20"></i>
+						<span>Device Data</span>
+				</a></li>
+
+
+				<li class="sidebar-item " th:classappend="${#httpServletRequest.getRequestURI() == '/requestqueues' ? 'active':''}"><a th:href="@{/requestqueues}"
+					class='sidebar-link'> <i data-feather="figma" width="20"></i> <span>Request
+							Queue</span>
+				</a></li>
+			</ul>
+		</div>
+		<button class="sidebar-toggler btn x">
+			<i data-feather="x"></i>
+		</button>
+	</div>
+</div>

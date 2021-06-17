@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Change JWT User Password</title>
+</head>
+
+<body>
+    <div layout:fragment="heading">
+        <h4>Change JWT User Account</h4>
+    </div>
+
+    <div layout:fragment="content">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form autocomplete="off" th:action="@{/jwtusers/edit}" th:method="put" th:object="${jwtuser}">
+                                <input type="hidden" th:field="*{jwtUserId}" />
+                                <div class="form-body row">
+                                    <div class="col-md-2">
+                                        <label>User Name</label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <label th:text="${jwtuser.username}"></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label for="roles">Company </label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <select th:name="company" class="form-control" id="company" required>
+													<option value="">Select Company</option>
+													<option th:each="company : ${companies}"
+														th:value="${company.companyId}"
+														th:selected="${company.companyId eq current_companyId}"
+														th:text="${company.companyName}">Company
+														Name</option>
+												</select>
+                                                <div class="form-control-icon">
+                                                    <i data-feather="server"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="text-danger text-center text-subtitle" th:if="${#fields.hasErrors('company')}" th:errors="*{company}">Error!</div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label>Session Time</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" th:field="*{SessionTime}" class="form-control" placeholder="Enter Session Time">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="clock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+
+                                    <div class="col-md-2">
+                                        <label for="enabled">Status</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group">
+                                            <label class="toggleSwitch ml-0" onclick=""> <input
+												type="checkbox" th:checked="*{status}" id="status"
+												name="status" /> <span> <span>Off</span> <span>On</span>
+													&nbsp;
+											</span> <a></a>
+											</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+
+                                    <div class="col-md-2">
+                                        <label>Resource Services</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <select class="form-control" th:field="*{resources}" id="choices-multiple-remove-button" required placeholder="Select Resources" multiple data-live-search="true">  
+													<option th:each="resource : ${resources}"
+														th:value="${resource.resourceId}"
+														th:text="${resource.resourceName}"
+                                                        th:selected="${jwtuser.resources.contains(resource)}"></option>
+												</select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2">
+                                        <label>Whitelist IP</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" id="whitelistIp" name="whitelistIp" th:field="*{whitelistIp}" class="form-control" placeholder="Enter IP Adress">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="activity"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                        <a th:href="@{/jwtusers}" class="btn btn-primary mr-1">
+                                            <i data-feather="corner-down-left"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

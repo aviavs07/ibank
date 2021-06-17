@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="dashboard/reports">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Avijit Saha" />
+    <title>Show Account Info Details</title>
+</head>
+
+<body>
+    <div layout:fragment="reports">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-decoration-underline">Account Query Details</h4>
+                        Account Information : : <span>[[${listacinfo.accountNo}]]</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row my-2 justify-content-start ">
+                            <div class="col-md-3 p-1 border-bottom">
+                                <label>Account No</label>
+                            </div>
+                            <div class="col-md-9 p-1 border-bottom">
+                                : <span>[[${listacinfo.accountNo}]]</span>
+                            </div>
+                            <div class="col-md-3 p-1 border-bottom">
+                                <label>Request By</label>
+                            </div>
+                            <div class="col-md-9 p-1 border-bottom">
+                                : <span>[[${listacinfo.jwtUserName}]]</span>
+                            </div>
+                            <div class="col-md-3 p-1 border-bottom">
+                                <label>Request From</label>
+                            </div>
+                            <div class="col-md-9 p-1 border-bottom">
+                                : <span>[[${listacinfo.ip}]]</span>
+                            </div>
+                            <div class="col-md-3 p-1 border-bottom">
+                                <label>OFS Request</label>
+                            </div>
+                            <div class="col-md-9 p-1 border-bottom">
+                                : <span>[[${listacinfo.ofsRequest}]]</span>
+                            </div>
+                            <div class="col-md-3 p-1 border-bottom">
+                                <label>OFS Response</label>
+                            </div>
+                            <div class="col-md-9 p-1 border-bottom">
+                                : <span>[[${listacinfo.ofsResponse}]]</span>
+                            </div>
+                            <div class="col-md-3 p-1 border-bottom">
+                                <label>Request At</label>
+                            </div>
+                            <div class="col-md-9 p-1 border-bottom">
+                                : <span>[[${listacinfo.requestAt}]]</span>
+                            </div>
+                            <div class="col-md-3 p-1 border-bottom">
+                                <label>Response At</label>
+                            </div>
+                            <div class="col-md-9 p-1 border-bottom">
+                                : <span>[[${listacinfo.responseAt}]]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-actions mt-2 d-flex justify-content-center">
+                            <a th:href="@{/account-info}" class="btn btn-primary mr-1"><i
+                                    data-feather="corner-down-left"></i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

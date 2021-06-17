@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>New JwtUser</title>
+</head>
+
+<body>
+    <div layout:fragment="heading">
+        <h4>New JWT User Account</h4>
+    </div>
+    <div layout:fragment="content">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form autocomplete="off" th:action="@{/jwtusers/save}" th:method="post" th:object="${jwtuser}">
+                                <div class="form-body row">
+                                    <div class="col-md-2">
+                                        <label>User Name</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" autocomplete="false" placeholder="User Name" id="username" name="username" th:field="*{username}">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="user"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="text-danger text-center text-subtitle" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error!</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Password</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="password" class="form-control" placeholder="Password" id="password" name="password" th:field="*{password}" required>
+                                                <div class="form-control-icon">
+                                                    <i data-feather="lock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 text-info">
+                                        <i style="cursor: pointer;" data-feather="info" class="m-0 p-0 round" tabindex="1" data-bs-toggle="popover" data-bs-placement="right" title="Password Criteria" data-bs-content="Password must contain at least one digit,one lowercase char,one uppercase char,one symbol and minimum 8 character length"></i>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="text-danger" th:each="error: ${#fields.errors('password')}">
+                                            <li th:each="message : ${error.split(',')}">
+                                                <p class="error-message" th:text="${message}"></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Confirm Password</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+                                                <div class="form-control-icon">
+                                                    <i data-feather="key"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2">
+                                        <label for="company">Company </label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <select th:name="company" class="form-control" id="company" required>
+													<option value="">Select Company</option>
+													<option th:each="company : ${companies}"
+														th:value="${company.getCompanyId()}"
+														th:selected="${company.getCompanyId() eq current_companyId}"
+														th:text="${company.getCompanyName()}">Company
+														Name</option>
+												</select>
+                                                <div class="form-control-icon">
+                                                    <i data-feather="server"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="text-danger text-center text-subtitle" th:if="${#fields.hasErrors('company')}" th:errors="*{company}">Error!</div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label>Session Time</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" id="SessionTime" name="SessionTime" th:field="*{SessionTime}" class="form-control" placeholder="Enter Session Time">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="clock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2">
+                                        <label>Resource Services</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <select th:name="resource[]" class="form-control" id="choices-multiple-remove-button" required placeholder="Select Resources" multiple data-live-search="true">
+													<option th:each="resource : ${resources}"
+														th:value="${resource.getResourceId()}"
+														th:text="${resource.getResourceName()}"></option>
+												</select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2">
+                                        <label>Whitelist IP</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" id="whitelistIp" th:field="*{whitelistIp}" class="form-control" placeholder="Enter IP Adress">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="activity"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-3">
+                                        <button type="submit" onclick="return validatePassword()" class="btn btn-success">Save</button>
+                                        <a th:href="@{/jwtusers}" class="btn btn-primary mr-1"><i
+											data-feather="corner-down-left"></i> </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

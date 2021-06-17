@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>New DeviceMetadata</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <h1 th:if="${devicemetadata.deviceId == null}">New DeviceMetadata</h1>
+        <h1 th:if="${devicemetadata.deviceId != null}">Edit DeviceMetadata</h1>
+        <hr />
+        <form th:action="@{/devicemetadatas}" th:method="@{${devicemetadata.deviceId == null} ? 'post' : 'put'}" th:object="${devicemetadata}">
+            <input type="hidden" th:field="*{deviceId}" />
+
+            <div class="form-group">
+                <label for="deviceDetails">DeviceDetails</label>
+                <input id="deviceDetails" name="deviceDetails" type="text" class="form-control" th:field="*{deviceDetails}" />
+            </div>
+            <div class="form-group">
+                <label for="lastLoggedIn">LastLoggedIn</label>
+                <input id="lastLoggedIn" name="lastLoggedIn" type="text" class="form-control" th:field="*{lastLoggedIn}" />
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input id="location" name="location" type="text" class="form-control" th:field="*{location}" />
+            </div>
+            <div class="form-group">
+                <label for="jwtUser">JwtUser</label>
+                <input id="jwtUser" name="jwtUser" type="text" class="form-control" th:field="*{jwtUser}" />
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a th:href="@{/devicemetadatas}" class="btn btn-default">Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

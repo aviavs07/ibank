@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+<head>
+ 	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<h1>List Privilege</h1>
+		<hr />
+		<a th:href="@{/privileges/new}">New Privilege</a><br/><br/>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>EntryAt</th> 
+					<th>Name</th> 
+					<th>UserAccount</th> 
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="privilege : ${listPrivilege}">
+					<td th:text="${privilege.entryAt}"></td> 
+					<td th:text="${privilege.name}"></td> 
+					<td th:text="${privilege.userAccount}"></td> 
+					<td>
+							<a th:href="@{/privileges/{id}(id = ${privilege.privId})}">Show</a> 
+					 		<a th:href="@{/privileges/{id}/edit(id = ${privilege.privId})}">Edit</a> 
+							<a href="#">Destroy</a> 
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

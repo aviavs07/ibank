@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Show Company History List</title>
+</head>
+
+<body>
+	<div layout:fragment="heading">
+		<h4>
+			Company : : <span th:text="${companies.companyName}"></span>
+		</h4>
+		<p class="text-subtitle text-muted">History Details</p>
+	</div>
+	<div layout:fragment="content">
+		<div class="row mb-2">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-content">
+						<div class="card-body">
+							<div class="card-body table-responsive">
+
+								<table class="table table-sm table-striped  table-bordered text-center">
+									<thead class="bg-info text-white ">
+										<tr>
+											<th>ID</th>
+											<th>Entry/Modification</th>
+											<th>Entry/Modification Address</th>
+											<th>Entry/Modification At</th>
+											<th>Entry/Modification By</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="entities : ${entities}">
+											<td th:text="${entities.getEntity().getCompanyId()}"></td>
+											<td th:text="${entities.getEntity().getCompanyName()}"></td>
+											<td th:text="${entities.getEntity().getCompanyAddress()}"></td>
+											<td th:text="${entities.getRevision().getRevisionDate()}"></td>
+											<td th:text="${entities.getRevision().getLogUser()}"></td>
+											<td th:text="${entities.getType()}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="card-footer">
+							<div class="form-actions mt-2 d-flex justify-content-center">
+								<a th:href="@{/companies/{id}(id = ${companies.companyId})}" class="btn btn-primary mr-1"><i
+										data-feather="corner-down-left"></i> </a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>New AuthToken</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <h1 th:if="${authtoken.verifyTokenId == null}">New AuthToken</h1>
+        <h1 th:if="${authtoken.verifyTokenId != null}">Edit AuthToken</h1>
+        <hr />
+        <form th:action="@{/authtokens}" th:method="@{${authtoken.verifyTokenId == null} ? 'post' : 'put'}" th:object="${authtoken}">
+            <input type="hidden" th:field="*{verifyTokenId}" />
+            <div class="form-group">
+                <label for="expiryDate">ExpiryDate</label>
+                <input id="expiryDate" name="expiryDate" type="text" class="form-control" th:field="*{expiryDate}" />
+            </div>
+            <div class="form-group">
+                <label for="token">Token</label>
+                <input id="token" name="token" type="text" class="form-control" th:field="*{token}" />
+            </div>
+            <div class="form-actions mt-2 d-flex justify-content-center">
+                <button type="submit" class="btn btn-success">Save</button>
+                <a th:href="@{/authtokens}" class="btn btn-default">Back</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

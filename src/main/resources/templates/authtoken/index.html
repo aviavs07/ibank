@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+</head>
+
+<body>
+
+    <div layout:fragment="content">
+        <h1>List AuthToken</h1>
+        <hr />
+        <a th:href="@{/authtokens/new}">New AuthToken</a><br /> <br />
+
+        <table class="table table-sm table-striped  table-bordered text-center datatable">
+            <thead>
+                <tr>
+                    <th>ExpiryDate</th>
+                    <th>Token</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:each="authtoken : ${listAuthToken}">
+                    <tr>
+                        <td>[[${authtoken.expiryDate}]]</td>
+                        <td>[[${authtoken.token}]]</td>
+                        <td><a th:href="@{/authtokens/{id}(id = ${authtoken.verifyTokenId})}">Show</a>
+                            <a th:href="@{/authtokens/{id}/edit(id = ${authtoken.verifyTokenId})}">Edit</a>
+                            <a href="#">Destroy</a></td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

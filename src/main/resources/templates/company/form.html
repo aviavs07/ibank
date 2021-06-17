@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>New Company</title>
+</head>
+
+<body>
+
+    <div layout:fragment="heading">
+        <h4 th:if="${company.companyId == 0}">New Company</h4>
+        <h4 th:if="${company.companyId != 0}">Edit Company</h4>
+        <p class="text-subtitle text-muted">Companies getting service</p>
+    </div>
+
+
+    <div layout:fragment="content">
+
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+
+                            <form th:action="@{/companies}" th:method="@{${company.companyId == null} ? 'post' : 'put'}" th:object="${company}">
+
+                                <div class="form-body row">
+                                    <input type="hidden" th:field="*{companyId}" />
+                                    <div class="col-md-2">
+                                        <label>Company Name</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" placeholder="Company Name" id="companyName" name="companyName" th:field="*{companyName}" required>
+                                                <div class="form-control-icon">
+                                                    <i data-feather="briefcase"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2">
+                                        <label>Company Address</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" placeholder="Company Address" id="companyAddress" name="companyAddress" th:field="*{companyAddress}" required>
+                                                <div class="form-control-icon">
+                                                    <i data-feather="map-pin"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+
+
+                                    <div class="col-md-2">
+                                        <label>Account With</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" placeholder="Account With" id="accountWith" name="accountWith" th:field="*{accountWith}">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="home"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+
+
+                                    <div class="col-md-2">
+                                        <label>Covered Account</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" placeholder="Covered Account" id="coveredAccount" name="coveredAccount" th:field="*{coveredAccount}">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="slack"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+
+                                    <div class="col-md-2">
+                                        <label for="OrganizatinType">Organization Type</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <select th:name="organizationType" class="form-control" id="organizationType" required>
+													<option value="">Select Organization Type</option>
+													<option th:each="org : ${organization_types}"
+														th:value="${org.getOrganizationTypeId()}"
+														th:selected="${org.getOrganizationTypeId() eq current_organization_type}"
+														th:text="${org.getOrganizationName()}">Organizatin
+														Type</option>
+												</select>
+                                                <div class="form-control-icon">
+                                                    <i data-feather="lock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <a th:href="@{/orgtype/new}" class="btn btn-primary mr-1 btn-sm">ADD
+											<i data-feather="plus-circle" width="20"></i>
+									</a></div>
+                                </div>
+
+                                <div class="form-actions mt-2 d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-success mr-1">
+										Save <i data-feather="save"></i>
+									</button>
+                                    <a th:href="@{/companies}" class="btn btn-danger mr-1">Back
+										<i data-feather="corner-down-left" width="20"></i>
+									</a>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

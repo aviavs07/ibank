@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Shahadat Hossain" />
+    <title>List of Company</title>
+
+</head>
+
+<body>
+
+    <div layout:fragment="heading">
+        <h4>List of Company</h4>
+    </div>
+
+
+    <div layout:fragment="content">
+
+        <div class="row mb-1">
+            <div class="col-12" sec:authorize="hasAnyAuthority('ADMIN', 'CREATOR')">
+                <a class="btn btn-warning round float-right btn-sm" th:href="@{/companies/new}">Company <i
+					data-feather="plus-circle" width="20"></i>
+				</a>
+            </div>
+        </div>
+
+        <div class="row mb-2 mt-2">
+            <div class="col-12 table-responsive">
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body table-responsive">
+                            <table class="table table-sm table-striped  table-bordered text-center datatable">
+                                <thead class="bg-info text-white">
+                                    <tr>
+                                        <th>Company Name</th>
+                                        <th>Company Address</th>
+                                        <th>Account With</th>
+                                        <th>Covered Account</th>
+                                        <th>Type</th>
+                                        <th>Entry At</th>
+                                        <th>Created By</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <th:block th:each="companyWrappers : ${listCompany}">
+                                        <tr>
+                                            <td>[[${companyWrappers.entity.companyName}]]</td>
+                                            <td>[[${companyWrappers.entity.companyAddress}]]</td>
+                                            <td>[[${companyWrappers.entity.accountWith}]]</td>
+                                            <td>[[${companyWrappers.entity.coveredAccount}]]</td>
+                                            <td>[[${companyWrappers.entity.organizationType}]]</td>
+                                            <td>[[${companyWrappers.entity.createdDate}]]</td>
+                                            <td>[[${#strings.capitalize(companyWrappers.createdByUser)}]]</td>
+                                            <td class="text-center">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <a class=" p-1 text-info" th:href="@{/companies/{id}(id = ${companyWrappers.entity.companyId})}">
+                                                        <i data-feather="eye"></i>
+                                                    </a>
+                                                    <a sec:authorize="hasAnyAuthority('ADMIN')" class="p-1 text-warning" th:href="@{/companies/{id}/edit(id = ${companyWrappers.entity.companyId})}">
+                                                        <i data-feather="edit"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

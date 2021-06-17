@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="dashboard/user-management">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="shahadat hossain" />
+    <title>New Role</title>
+</head>
+
+<body>
+    <div layout:fragment="usermanagement">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-uppercase text-primary" th:if="${role.roleId == 0}">New Role</h4>
+                        <h4 class="text-uppercase text-warning" th:if="${role.roleId != 0}">Edit Role</h4>
+                    </div>
+                    <div class="card-body">
+                        <form autocomplete="off"
+                            th:action="@{${role.roleId == 0} ? '/roles' : '/roles/update/'+ ${role.roleId}}"
+                            th:method="${role.roleId == 0} ? POST : PUT" th:object="${role}">
+                            <div class="form-body row">
+                                <input type="hidden" th:field="*{roleId}" />
+                                <div class="col-md-2">
+                                    <label for="roleName">Role Name</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="Role Name"
+                                                id="roleName" name="roleName" th:field="*{roleName}" required
+                                                oninput="this.value = this.value.toUpperCase()">
+                                            <div class="form-control-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="text-danger text-center text-subtitle"
+                                        th:if="${#fields.hasErrors('roleName')}" th:errors="*{roleName}">Role Name
+                                        Error!</div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                        <a th:href="@{/roles}" class="btn btn-primary mr-1"><i
+                                                data-feather="corner-down-left"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

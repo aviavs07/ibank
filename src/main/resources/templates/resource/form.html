@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="shahadat hossain" />
+    <title>New UserAccount</title>
+</head>
+
+<body>
+    <div layout:fragment="heading">
+        <h4 th:if="${resource.resourceId == 0}">New Resource</h4>
+        <h4 th:if="${resource.resourceId != 0}">Edit Resource</h4>
+    </div>
+    <div layout:fragment="content">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form autocomplete="off"
+                                th:action="@{${resource.resourceId == 0} ? '/resources/save' : '/resources/update/'+ ${resource.resourceId}}"
+                                th:method="@{${resource.resourceId == 0} ? 'post' : 'put'}" th:object="${resource}">
+                                <div class="form-body row">
+                                    <input type="hidden" th:field="*{resourceId}" />
+
+                                    <div class="col-md-2">
+                                        <label for="resourceName">Resource Name</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" placeholder="Resource Name"
+                                                    id="resourceName" name="resourceName" th:field="*{resourceName}"
+                                                    required oninput="this.value = this.value.toUpperCase()">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="user"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="requestType">Request Type</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <div class="form-check form-check-inline"
+                                                    th:each="task : ${request_types}">
+                                                    <input class="form-check-input" type="radio" name="requestType"
+                                                        id="requestType" th:value="${task.getReqTypeId()}" required>
+                                                    <label class="form-check-label"
+                                                        th:for="${task.getReqTypeId()}"><span
+                                                            th:text="${task.getReqTypeName()}"></span></label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <a th:href="@{/reqtype/new}" class="btn btn-primary mr-1 btn-sm">ADD
+                                            <i data-feather="plus-circle" width="20"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                        <a th:href="@{/resources}" class="btn btn-primary mr-1"><i
+                                                data-feather="corner-down-left"></i></a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

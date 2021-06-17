@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="dashboard/user-management">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Avijit Saha" />
+    <title>Edit Service User</title>
+</head>
+
+<body>
+    <div layout:fragment="usermanagement">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-uppercase text-warning">Edit Service User</h4>
+                    </div>
+                    <div class="card-body">
+                        <form autocomplete="off" th:action="@{/serviceusers/update}" th:method="post"
+                            th:object="${useraccount}">
+                            <div class="form-body row">
+                                <input type="hidden" th:field="*{userId}" />
+                                <div class="col-md-2">
+                                    <label>First Name</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="First Name"
+                                                id="firstName" name="firstName" th:field="*{firstName}" required>
+                                            <div class="form-control-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="text-danger text-center text-subtitle"
+                                        th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First
+                                        Name Error!</div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Last Name</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="Last Name"
+                                                id="lastName" name="lastName" th:field="*{lastName}" required>
+                                            <div class="form-control-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="text-danger text-center text-subtitle"
+                                        th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Error!
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="User Email"
+                                                id="userEmail" name="userEmail" th:field="*{userEmail}" readonly>
+                                            <div class="form-control-icon">
+                                                <i data-feather="mail"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="text-danger text-center text-subtitle"
+                                        th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}">Error!
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>User Bank ID</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="User Bank ID"
+                                                id="userBankId" name="userBankId" th:field="*{userBankId}" readonly>
+                                            <div class="form-control-icon">
+                                                <i data-feather="credit-card"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="text-danger text-center text-subtitle"
+                                        th:if="${#fields.hasErrors('userBankId')}" th:errors="*{userBankId}">Error!
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="enabled">Enabled</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="toggleSwitch ml-0" onclick=""> <input type="checkbox"
+                                                th:checked="*{enabled}" id="enabled" name="enabled" /> <span>
+                                                <span>Off</span> <span>On</span>
+                                                &nbsp;
+                                            </span> <a></a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5"></div>
+                                <div class="col-md-2">
+                                    <label for="isUsing2fa">Using 2FA</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="toggleSwitch ml-0" onclick=""> <input type="checkbox"
+                                                th:checked="*{isUsing2fa}" id="isUsing2fa" name="isUsing2fa" />
+                                            <span> <span>Off</span> <span>On</span>
+                                                &nbsp;
+                                            </span> <a></a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5"></div>
+                                <div class="col-md-2">
+                                    <label for="roles">Company </label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <select th:name="company" class="form-control" id="company" required>
+                                                <option value="">Select Company</option>
+                                                <option th:each="company : ${companies}" th:value="${company.companyId}"
+                                                    th:selected="${company.companyId eq current_companyId}"
+                                                    th:text="${company.companyName}">Company
+                                                    Name</option>
+                                            </select>
+                                            <div class="form-control-icon">
+                                                <i data-feather="server"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="text-danger text-center text-subtitle"
+                                        th:if="${#fields.hasErrors('company')}" th:errors="*{company}">Error!</div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Mobile</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="tel" class="form-control" min="11" placeholder="Mobile Number"
+                                                id="mobileNumber" name="mobileNumber" th:field="*{mobileNumber}">
+                                            <div class="form-control-icon">
+                                                <i data-feather="smartphone"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="text-danger text-center text-subtitle"
+                                        th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}">
+                                        Error!</div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="secret">Secret</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="Secret" id="secret"
+                                                name="secret" th:field="*{secret}" required>
+                                            <div class="form-control-icon">
+                                                <i data-feather="lock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5"></div>
+                                <div class="col-md-2">
+                                    <label for="roles">Roles: </label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <select class="form-control" th:field="*{roles}" required>
+                                                <option value="">Select User Role</option>
+                                                <option th:each="role : ${roles}" th:value="${role.roleId}"
+                                                    th:text="${role.roleName}"
+                                                    th:selected="${useraccount.roles.contains(role)}">Role Name
+                                                </option>
+                                            </select>
+                                            <div class="form-control-icon">
+                                                <i data-feather="lock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="text-danger text-center text-subtitle"
+                                        th:if="${#fields.hasErrors('userConfirmPassword')}"
+                                        th:errors="*{userConfirmPassword}">Error!</div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Whitelist IP</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group has-icon-left">
+                                        <div class="position-relative">
+                                            <input type="text" id="whitelistIp" th:field="*{whitelistIp}"
+                                                class="form-control" placeholder="Enter IP Adress">
+                                            <div class="form-control-icon">
+                                                <i data-feather="activity"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5"></div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-3">
+                                        <button type="submit " class="btn btn-success "
+                                            onclick="return Validate() ">Save</button>
+                                        <a th:href="@{/serviceusers} " class="btn btn-primary mr-1"><i
+                                                data-feather="corner-down-left"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

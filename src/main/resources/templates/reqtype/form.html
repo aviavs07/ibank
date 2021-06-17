@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>New Request Type</title>
+</head>
+
+<body>
+    <div layout:fragment="heading">
+        <h1 th:if="${reqtype.reqTypeId == 0}">New Request Type</h1>
+        <h1 th:if="${reqtype.reqTypeId != 0}">Edit Request Type</h1>
+    </div>
+    <div layout:fragment="content">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form autocomplete="off" th:action="@{${reqtype.reqTypeId == 0} ? '/reqtype' : '/reqtype/update/'+ ${reqtype.reqTypeId}}" th:method="${reqtype.reqTypeId == 0} ? POST : PUT" th:object="${reqtype}">
+                                <div class="form-body row">
+                                    <input type="hidden" th:field="*{reqTypeId}" />
+                                    <div class="col-md-2">
+                                        <label for="requestTymeName">Name of Request Type</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" placeholder="Request Type" id="reqTypeName" name="reqTypeName" th:field="*{reqTypeName}" required oninput="this.value = this.value.toUpperCase()">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="user"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="text-danger text-center text-subtitle" th:if="${#fields.hasErrors('reqTypeName')}" th:errors="*{reqTypeName}">Rquest Type Name Error!</div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                        <a th:href="@{/resources/new}" class="btn btn-default">Back</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

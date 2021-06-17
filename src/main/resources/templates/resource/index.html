@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="shahadat hossain" />
+
+</head>
+
+<body>
+
+    <div layout:fragment="heading">
+        <h4>List of Resource/Service</h4>
+    </div>
+
+    <div layout:fragment="content">
+        <div class="row mb-1">
+            <div class="col-12" sec:authorize="hasAnyAuthority('ADMIN', 'CREATOR')">
+                <a class="btn btn-warning round float-right btn-sm" th:href="@{/resources/new}">Resources<i
+					data-feather="user-plus" width="20"></i>
+				</a>
+            </div>
+        </div>
+
+        <div class="row mb-2 mt-2">
+            <div class="col-12 ">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body table-responsive">
+                            <table class="table table-sm table-striped  table-bordered text-center datatable">
+                                <thead class="bg-info text-white ">
+                                    <tr>
+                                        <th>Resource Name</th>
+                                        <th>Resource Link</th>
+                                        <th>Resource Type</th>
+                                        <th>Updated At</th>
+                                        <th>Updated By</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="resourceWrappers : ${listResource}">
+                                        <tr>
+                                            <td>[[${resourceWrappers.entity.resourceName}]]</td>
+                                            <td>[[${resourceWrappers.entity.subLink}]]</td>
+                                            <td>[[${#strings.capitalize(resourceWrappers.entity.requestType.reqTypeName)}]]</td>
+                                            <td>[[${resourceWrappers.entity.createdDate}]]</td>
+                                            <td>[[${#strings.capitalize(resourceWrappers.createdByUser)}]]</td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <a class=" p-1 text-info" th:href="@{/resources/{id}(id = ${resourceWrappers.entity.resourceId})}">
+                                                        <i data-feather="eye"></i>
+                                                    </a>
+                                                    <a sec:authorize="hasAnyAuthority('ADMIN')" class=" p-1 text-warning" th:href="@{/resources/{id}/edit(id = ${resourceWrappers.entity.resourceId})}">
+                                                        <i data-feather="edit"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

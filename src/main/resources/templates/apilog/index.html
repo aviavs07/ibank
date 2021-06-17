@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="dashboard/reports">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="shahadat hossain" />
+
+</head>
+
+<body>
+    <div layout:fragment="reports">
+        <form class="row mx-3 mb-1 border-bottom" th:action="@{/apilogs}" th:method="get">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="basicInput">From Date</label> <input type="text" class="form-control datepicker"
+                        id="fromdate" name="fromDate" placeholder="From Date">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="basicInput">To Date</label> <input type="text" class="form-control datepicker"
+                        id="todate" name="toDate" placeholder="To Date">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="helperText">IP Address</label>
+                    <input type="text" id="todate" class="form-control" name="ipAddress" placeholder="Ex. 0.0.0.0">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="helperText">Username</label>
+                    <input type="text" id="todate" class="form-control" name="userName" placeholder="Username">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="helperText">&nbsp;</label>
+                    <button type="submit" id="todate" class="form-control btn btn-info">Search</button>
+                </div>
+            </div>
+        </form>
+        <div class="row mb-2 mt-2">
+            <div class="col-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-decoration-underline">List of API Logs</h4>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-sm table-striped  table-bordered text-center datatable">
+                            <thead class="bg-info text-white ">
+                                <tr>
+                                    <th>Log ID</th>
+                                    <th>Host Name</th>
+                                    <th>Http Request</th>
+                                    <th>Http Response</th>
+                                    <th>IP Address</th>
+                                    <th>Protocol</th>
+                                    <th>Request At</th>
+                                    <th>Response At</th>
+                                    <th>URI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <th:block th:each="apilog : ${listapilogs}">
+                                    <tr>
+                                        <td>[[${apilog.logId}]]</td>
+                                        <td>[[${apilog.hostName}]]</td>
+                                        <td>[[${apilog.httpRequest}]]</td>
+                                        <td>[[${apilog.httpResponse}]]</td>
+                                        <td>[[${apilog.ip}]]</td>
+                                        <td>[[${apilog.protocol}]]</td>
+                                        <td>[[${apilog.requestAt}]]</td>
+                                        <td>[[${apilog.responseAt}]]</td>
+                                        <td>[[${apilog.uri}]]</td>
+                                    </tr>
+                                </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

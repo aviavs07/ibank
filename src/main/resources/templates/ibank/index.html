@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+</head>
+
+<body>
+
+
+    <div layout:fragment="heading">
+        <h4>iBank Users List</h4>
+    </div>
+
+    <div layout:fragment="content">
+        <div class="row mb-1">
+            <div class="col-12" sec:authorize="hasAnyAuthority('ADMIN', 'CREATOR')">
+                <a class="btn btn-warning round float-right btn-sm" th:href="@{/ibankusers/new}">iBank User<i
+					data-feather="globe" width="20"></i>
+				</a>
+            </div>
+        </div>
+
+
+
+        <div class="row mb-2 mt-2">
+            <div class="col-12 table-responsive">
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body table-responsive">
+                            <table class="table table-sm table-striped  table-bordered text-center datatable">
+
+                                <thead class="bg-info text-white">
+                                    <tr>
+                                        <th style="width:80px">iBank Username</th>
+                                        <th>Mobile</th>
+                                        <th>Status</th>
+                                        <th style="width:20px"> Basic Token</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th:block th:each="ibankUser : ${ibankUsers}">
+                                        <tr>
+                                            <td>[[${ibankUser.fullName}]]</td>
+                                            <td>[[${ibankUser.mobileNumber}]]</td>
+                                            <td><i class="text-success " th:if="${ibankUser.status}" data-feather="check"></i>
+                                                <i class="text-danger" th:unless="${ibankUser.status == true}" data-feather="x"></i></td>
+                                            <td>[[${ibankUser.jwtToken}]]</td>
+                                            <td>
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <a class=" p-1 text-info" th:href="@{/ibankusers/{id}(id = ${ibankUser.ibankUserId})}">
+                                                        <i data-feather="eye"></i>
+                                                    </a>
+                                                    <a sec:authorize="hasAnyAuthority('ADMIN')" class=" p-1 text-warning" th:href="@{/ibankusers/{id}/edit(id = ${ibankUser.ibankUserId})}">
+                                                        <i data-feather="edit"></i>
+                                                    </a>
+                                                    <a sec:authorize="hasAnyAuthority('ADMIN')" class=" p-1 text-success" th:href="@{/ibankusers/{id}/password(id = ${ibankUser.ibankUserId})}">
+                                                        <i data-feather="lock"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

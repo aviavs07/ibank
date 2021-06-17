@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="dashboard/reports">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="shahadat hossain" />
+    <title>Show Remitter Info</title>
+</head>
+
+<body>
+    <div layout:fragment="reports">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-decoration-underline">Remittance Details</h4>
+                        Remittance Information : : <span th:text="${remitterInfo.remittanceUniqueId}"></span>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row ">
+                                <div class="col border ">
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom ">
+                                            <label>Ramittance Unique No</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 border-bottom ">
+                                            : <span>[[${remitterInfo.remittanceUniqueId}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Status</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 border-bottom" th:switch="${remitterInfo.status}">
+                                            <span th:case="1" th:class="text-warning">: Pending</span>
+                                            <span th:case="2" th:class="text-success">: Success</span>
+                                            <span th:case="3" th:class="text-danger">: Failed ([[${error}]])</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Remittance Type</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom border-right">
+                                            : <span>[[${remitterInfo.remittanceType}]]</span>
+                                        </div>
+                                        <div class="col-md-2 p-1 border-bottom">
+                                            <label>Pin Code</label>
+                                        </div>
+                                        <div class="col-md-4 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.pinCode}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Remitter Name</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.remitterName}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Date Of Birth</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom border-right">
+                                            : <span>[[${remitterInfo.dateOfBirth}]]</span>
+                                        </div>
+                                        <div class="col-md-2 p-1 border-bottom">
+                                            <label>Occupation</label>
+                                        </div>
+                                        <div class="col-md-4 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.occupation}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Nationality</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom border-right">
+                                            : <span>[[${remitterInfo.nationality}]]</span>
+                                        </div>
+                                        <div class="col-md-2 p-1 border-bottom">
+                                            <label>District</label>
+                                        </div>
+                                        <div class="col-md-4 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.remitterDistrict}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Passport Number</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom border-right">
+                                            : <span>[[${remitterInfo.passportNumber}]]</span>
+                                        </div>
+                                        <div class="col-md-2 p-1 border-bottom">
+                                            <label>Gender</label>
+                                        </div>
+                                        <div class="col-md-4 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.remitterGender}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Employment Card/ Residence Card</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.employmentCard}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Remitter Document Number</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom border-right">
+                                            : <span>[[${remitterInfo.remitterDocumentNumber}]]</span>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Document Type</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom ">
+                                            : <span>[[${remitterInfo.remitterDocumentType}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom ">
+                                            <label>Originating Country</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom border-right">
+                                            : <span>[[${remitterInfo.originatingCountry}]]</span>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Exchange Rate</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.exRate}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 ">
+                                            <label>Sending Country Currency Name</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-right">
+                                            : <span>[[${remitterInfo.sendingCountryCurrencyName}]]</span>
+                                        </div>
+                                        <div class="col-md-3 p-1">
+                                            <label>Amount In Sending Country Currency</label>
+                                        </div>
+                                        <div class="col-md-3 p-1">
+                                            : <span>[[${remitterInfo.amountInSendingCountryCurrency}]]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col border">
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Relationship With Beneficiary</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom border-right">
+                                            : <span>[[${remitterInfo.relationshipWithBeneficiary}]]</span>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Purpose Of Remittance</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.purposeOfRemittance}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Ramittance No</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.remittanceNo}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Name Of Payment System</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.nameOfPaymentSystem}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Beneficiary Name</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.beneficiaryName}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Beneficiary ID No</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom border-right">
+                                            : <span>[[${remitterInfo.beneficiaryIdNo}]]</span>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>ID Type</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.beneficiaryIdType}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Gender</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom border-right">
+                                            : <span>[[${remitterInfo.beneficiaryGender}]]</span>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>District</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.beneficiaryDistrict}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>AccountNo</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom border-right">
+                                            : <span
+                                                th:class="( ${error} == 'HOLD - OVERRIDE SAME DEBIT AND CREDIT ACCOUNT' ? text-danger : ( ${error} == '' ? 'text-danger' : '' ) )">[[${remitterInfo.accountNo}]]</span>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Account Type</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.accountType}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Branch Name</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom border-right">
+                                            : <span class=""
+                                                th:classappend="${error} == 'CUSTOM.CREDIT.CO.CODE.MISSING' ? text-danger : ''">[[${remitterInfo.branchName}]]
+                                                ([[${remitterInfo.branchCode}]])</span>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Bneficiary Mobile</label>
+                                        </div>
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.beneficiaryMobileNumber}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Amount In BDT</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 border-bottom">
+                                            :
+                                            <span>[[${#numbers.formatDecimal(remitterInfo.amountInBDT,0,'COMMA',2,'POINT')}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Commission</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 border-bottom">
+                                            : <span>[[${remitterInfo.commission}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Amount In USD</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 border-bottom">
+                                            :
+                                            <span>$[[${#numbers.formatDecimal(remitterInfo.amountInUSD,0,'COMMA',2,'POINT')}]]</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 border-bottom">
+                                            <label>Issue Date</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 border-bottom">
+                                            : <span> [[${remitterInfo.issueDate}]] </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 p-1 ">
+                                            <label>Remarks</label>
+                                        </div>
+                                        <div class="col-md-9 p-1 ">
+                                            : <span>[[${remitterInfo.remarks}]]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row p-2">
+                                <span class="text-uppercase text-decoration-underline text-blue">Others
+                                    Information</span>
+                            </div>
+                            <div class="row border">
+                                <div class="col-md-2 p-1 border-bottom border-right">
+                                    <label>Covered Account</label>
+                                </div>
+                                <div class="col-md-10 p-1 border-bottom">
+                                    <span
+                                        th:class="( ${error} == 'HOLD - OVERRIDE SAME DEBIT AND CREDIT ACCOUNT' ? text-danger : ( ${error} == 'CUSTOM.DEBIT.ACCOUNT.MISSING' ? 'text-danger' : '' ) )">[[${remitterInfo.coveredAccount}]]</span>
+                                    <span> ([[${remitterInfo.coveredAccountCoCode}]])</span>
+                                </div>
+                                <div class="col-md-2 p-1 border-bottom border-right">
+                                    <label>Request From</label>
+                                </div>
+                                <div class="col-md-4 p-1 border-bottom border-right">
+                                    <span>[[${remitterInfo.ip}]]</span>
+                                </div>
+                                <div class="col-md-2 p-1 border-bottom border-right">
+                                    <label>Host Name</label>
+                                </div>
+                                <div class="col-md-4 p-1 border-bottom">
+                                    <span>[[${remitterInfo.hostName}]]</span>
+                                </div>
+                                <div class="col-md-2 p-1 border-bottom border-right">
+                                    <label>Request At</label>
+                                </div>
+                                <div class="col-md-4 p-1 border-bottom border-right">
+                                    <span> [[${remitterInfo.requestAt}]] </span>
+                                </div>
+                                <div class="col-md-2 p-1 border-bottom border-right">
+                                    <label>Response At</label>
+                                </div>
+                                <div class="col-md-4 p-1 border-bottom">
+                                    : <span> [[${remitterInfo.responseAt}]] </span>
+                                </div>
+                                <div class="col-md-2 p-1 border-bottom border-right">
+                                    <label>OFS Request</label>
+                                </div>
+                                <div class="col-md-10 p-1 border-bottom ">
+                                    <span> [[${remitterInfo.ofsRequest}]] </span>
+                                </div>
+                                <div class="col-md-2 p-1 border-bottom border-right">
+                                    <label>OFS Response</label>
+                                </div>
+                                <div class="col-md-10 p-1 border-bottom">
+                                    <span> [[${remitterInfo.ofsResponse}]] </span>
+                                </div>
+                                <div class="col-md-2 p-1 border-right">
+                                    <label>View History</label>
+                                </div>
+                                <div class="col-md-2 btn-group" role="group" aria-label="Basic example">
+                                    <a class=" p-1 text-info"
+                                        th:href="@{/remitter-information/history/{id}(id = ${remitterInfo.remitterId})}">
+                                        <i data-feather="eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-actions mt-2 d-flex justify-content-center">
+                            <a th:href="@{/remitter-information}" class="btn btn-primary mr-1"><i
+                                    data-feather="corner-down-left"></i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

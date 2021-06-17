@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="dashboard/user-management">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="Avijit Saha" />
+    <title>Show Service User</title>
+</head>
+
+<body>
+    <div layout:fragment="usermanagement">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-decoration-underline">User Details</h4>
+                        Service User : : <span th:text="${data.getEntity.firstName+' '+data.getEntity.lastName}"></span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row my-2 justify-content-start ">
+                            <div class="col-md-3 p-2 border-bottom">
+                                <label>First Name</label>
+                            </div>
+                            <div class="col-md-9 p-2 border-bottom">
+                                : <span>[[${data.getEntity.firstName}]]</span>
+                            </div>
+                            <div class="col-md-3 p-2 border-bottom">
+                                <label>Last Name</label>
+                            </div>
+                            <div class="col-md-9 p-2 border-bottom">
+                                : <span>[[${data.getEntity.lastName}]]</span>
+                            </div>
+                            <div class="col-md-3 p-2 border-bottom">
+                                <label>User Email</label>
+                            </div>
+                            <div class="col-md-9 p-2 border-bottom">
+                                : <span>[[${data.getEntity.userEmail}]]</span>
+                            </div>
+                            <div class="col-md-3 p-2 border-bottom">
+                                <label>User Bank ID</label>
+                            </div>
+                            <div class="col-md-9 p-2 border-bottom">
+                                : <span>[[${data.getEntity.userBankId}]]</span>
+                            </div>
+                            <div class="col-md-3 p-2 border-bottom">
+                                <label>Secret</label>
+                            </div>
+                            <div class="col-md-9 p-2 border-bottom">
+                                : <span>[[${data.getEntity.secret}]]</span>
+                            </div>
+                            <div class="col-md-3 p-2 border-bottom">
+                                <label>Enabled</label>
+                            </div>
+                            <div class="col-md-9 p-2 border-bottom">
+                                : <i class="text-success " th:if="${data.getEntity.enabled}" data-feather="check"></i>
+                                <i class="text-danger" th:unless="${data.getEntity.enabled == true}"
+                                    data-feather="x"></i>
+                            </div>
+                            <div class="col-md-3 p-2 border-bottom">
+                                <label>is Account Non Locked</label>
+                            </div>
+                            <div class="col-md-9 p-2 border-bottom">
+                                : <i class="text-success " th:if="${data.getEntity.accountNonLocked}"
+                                    data-feather="check"></i> <i class="text-danger"
+                                    th:unless="${data.getEntity.accountNonLocked == true}" data-feather="x"></i>
+                            </div>
+                            <div class="col-md-3 p-2 border-bottom">
+                                <label>Using 2FA</label>
+                            </div>
+                            <div class="col-md-9 p-2 border-bottom">
+                                : <i class="text-success" th:if="${data.getEntity.isUsing2fa}" data-feather="check"></i>
+                                <i class="text-danger" th:unless="${data.getEntity.isUsing2fa == true}"
+                                    data-feather="x"></i>
+                            </div>
+                            <div class="col-md-3 p-2 border-bottom">
+                                <label>Lock At</label>
+                            </div>
+                            <div class="col-md-9 p-2 border-bottom">
+                                : <span
+                                    th:if="${data.getEntity.lockTime != null}">[[${data.getEntity.lockTime}}]]</span>
+                            </div>
+                            <div class="col-md-3 p-2 border-bottom">
+                                <label>Entry At</label>
+                            </div>
+                            <div class="col-md-9 p-2 border-bottom">
+                                : <span>[[${data.getEntity.createdDate}]]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-actions mt-2 d-flex justify-content-center">
+                            <a sec:authorize="hasAnyAuthority('ADMIN')" class="btn btn-info mr-1"
+                                th:href="@{/serviceusers/{id}/edit(id = ${data.getEntity.userId})}">
+                                <i data-feather="edit"></i>
+                            </a> <a th:href="@{/serviceusers}" class="btn btn-primary mr-1"><i
+                                    data-feather="corner-down-left"></i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

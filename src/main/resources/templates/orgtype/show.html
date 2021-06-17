@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Show ResourceHis</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1>Show ResourceHis</h1>
+		<hr />
+
+		<div class="form-group"> 
+			<label for="entryAt">EntryAt: </label>  
+			<span th:text="${resourcehis.entryAt}"></span> 
+		</div> 
+		<div class="form-group"> 
+			<label for="entryBy">EntryBy: </label>  
+			<span th:text="${resourcehis.entryBy}"></span> 
+		</div> 
+		<div class="form-group"> 
+			<label for="resourceName">ResourceName: </label>  
+			<span th:text="${resourcehis.resourceName}"></span> 
+		</div> 
+		<div class="form-group"> 
+			<label for="resource">Resource: </label>  
+			<span th:text="${resourcehis.resource}"></span> 
+		</div> 
+
+		<a th:href="@{/resourcehiss/{id}/edit(id = ${resourcehis.resourceHisId})}">Edit this record</a> <br/>
+		<a href="#">Delete this record</a> <br/>
+		<a th:href="@{/resourcehiss}">Back to list ResourceHis</a> <br/>
+	</div>
+</body>
+</html>

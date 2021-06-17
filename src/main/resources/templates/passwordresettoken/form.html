@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>New PasswordResetToken</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <h1 th:if="${passwordresettoken.passId == null}">New PasswordResetToken</h1>
+        <h1 th:if="${passwordresettoken.passId != null}">Edit PasswordResetToken</h1>
+        <hr />
+        <form th:action="@{/passwordresettokens}" th:method="@{${passwordresettoken.passId == null} ? 'post' : 'put'}" th:object="${passwordresettoken}">
+            <input type="hidden" th:field="*{passId}" />
+
+            <div class="form-group">
+                <label for="expiryDate">ExpiryDate</label>
+                <input id="expiryDate" name="expiryDate" type="text" class="form-control" th:field="*{expiryDate}" />
+            </div>
+            <div class="form-group">
+                <label for="token">Token</label>
+                <input id="token" name="token" type="text" class="form-control" th:field="*{token}" />
+            </div>
+            <div class="form-group">
+                <label for="userAccount">UserAccount</label>
+                <input id="userAccount" name="userAccount" type="text" class="form-control" th:field="*{userAccount}" />
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a th:href="@{/passwordresettokens}" class="btn btn-default">Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

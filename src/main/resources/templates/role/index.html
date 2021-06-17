@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="dashboard/user-management">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="shahadat hossain" />
+</head>
+
+<body>
+	<div layout:fragment="usermanagement">
+		<div class="row mb-1">
+			<div class="col-12" sec:authorize="hasAnyAuthority('ADMIN', 'CREATOR')">
+				<a class="btn btn-warning round float-right btn-sm" th:href="@{/roles/new}">Role<i
+						data-feather="user-plus" width="20"></i>
+				</a>
+			</div>
+		</div>
+		<div class="row mb-2 mt-2">
+			<div class="col-12 ">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="text-decoration-underline">List of Role</h4>
+					</div>
+					<div class="card-body table-responsive">
+						<table class="table table-sm table-striped  table-bordered text-center datatable">
+							<thead class="bg-info text-white ">
+								<tr>
+									<th>Role ID</th>
+									<th>Role Name</th>
+									<th>Entry At</th>
+									<th>Entry By</th>
+									<th>Updated By</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="roleWrappers : ${listRole}">
+									<tr>
+										<td>[[${roleWrappers.entity.roleId}]]</td>
+										<td>[[${roleWrappers.entity.roleName}]]</td>
+										<td>[[${roleWrappers.entity.createdDate}]]</td>
+										<td>[[${#strings.capitalize(roleWrappers.createdByUser)}]]</td>
+										<td>[[${#strings.capitalize(roleWrappers.updatedByUser)}]]</td>
+										<td>
+											<div class="btn-group" role="group" aria-label="Basic example">
+												<a class=" p-1 text-info"
+													th:href="@{/roles/{id}(id = ${roleWrappers.entity.roleId})}">
+													<i data-feather="eye"></i>
+												</a> <a sec:authorize="hasAnyAuthority('ADMIN')"
+													class=" p-1 text-warning"
+													th:href="@{/roles/{id}/edit(id = ${roleWrappers.entity.roleId})}">
+													<i data-feather="edit"></i>
+												</a>
+											</div>
+										</td>
+									</tr>
+								</th:block>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

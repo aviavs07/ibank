@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="dashboard/user-management">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="Avijit Saha" />
+
+</head>
+
+<body>
+	<div layout:fragment="usermanagement">
+		<div class="row mb-1">
+			<div class="col-12" sec:authorize="hasAnyAuthority('ADMIN', 'CREATOR')">
+				<a class="btn btn-success round float-right btn-sm" th:href="@{/serviceusers/new}">Service User<i
+						data-feather="user-plus" width="20"></i>
+				</a>
+			</div>
+		</div>
+		<div class="row mb-2 mt-2">
+			<div class="col-12 ">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="text-decoration-underline">List of Service User</h4>
+					</div>
+					<div class="card-body table-responsive">
+						<table class="table table-sm table-striped  table-bordered text-center datatable">
+							<thead class="bg-info text-white ">
+								<tr>
+									<th>#</th>
+									<th>Service User Name</th>
+									<th>Email</th>
+									<th>Bank Id</th>
+									<th>Mobile</th>
+									<th>Enabled</th>
+									<th>Role</th>
+									<th>Company</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="serviceUser, iter : ${listServiceUser}">
+									<tr>
+										<td>[[${iter.count}]]</td>
+										<td>[[${serviceUser.firstName}]]</td>
+										<td>[[${serviceUser.userEmail}]]</td>
+										<td>[[${serviceUser.userBankId}]]</td>
+										<td>[[${serviceUser.mobileNumber}]]</td>
+										<td class="font-weight-bold"><i class="text-success "
+												th:if="${serviceUser.enabled}" data-feather="check"></i> <i
+												class="text-danger" th:unless="${serviceUser.enabled == true}"
+												data-feather="x"></i>
+										</td>
+										<td>[[${serviceUser.roles}]]</td>
+
+										<td>[[${serviceUser.company}]]</td>
+										<td>
+											<div class="btn-group" role="group" aria-label="Basic example">
+												<a class=" p-1 text-info"
+													th:href="@{/serviceusers/{id}(id = ${serviceUser.userId})}">
+													<i data-feather="eye"></i>
+												</a> <a sec:authorize="hasAnyAuthority('ADMIN')"
+													class=" p-1 text-warning"
+													th:href="@{/serviceusers/{id}/edit(id = ${serviceUser.userId})}">
+													<i data-feather="edit"></i>
+												</a> <a sec:authorize="hasAnyAuthority('ADMIN')"
+													class=" p-1 text-success"
+													th:href="@{/serviceusers/{id}/password(id = ${serviceUser.userId})}">
+													<i th:if="${serviceUser.accountNonLocked}"
+														data-feather="unlock"></i> <i class="text-danger"
+														th:unless="${serviceUser.accountNonLocked == true}"
+														data-feather="lock"></i>
+												</a>
+											</div>
+										</td>
+									</tr>
+								</th:block>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

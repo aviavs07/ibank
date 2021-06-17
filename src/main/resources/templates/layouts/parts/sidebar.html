@@ -1,0 +1,55 @@
+<div th:fragment="sidbar" id="sidebar" class='active'>
+	<div class="sidebar-wrapper active">
+		<div class="sidebar-header">
+			<img th:src="@{/assets/images/logo.svg}" alt="">
+		</div>
+		<div class="sidebar-menu">
+			<ul class="menu">
+				<li class='sidebar-title'>Main Menu</li>
+
+				<li class="sidebar-item "
+					th:classappend="${#httpServletRequest.getRequestURI() == '/dashboard' ? 'active':''}"><a
+					th:href="@{/dashboard}" class='sidebar-link'> <i
+						data-feather="home" width="20"></i> <span>Dashboard</span>
+				</a></li>
+				<li class="sidebar-item "
+					th:classappend="${(#httpServletRequest.getRequestURI().startsWith('/useraccounts') ? 'active':#httpServletRequest.getRequestURI().startsWith('/roles') ? 'active':#httpServletRequest.getRequestURI().startsWith('/serviceusers') ? 'active':'') }">
+					<a th:href="@{/useraccounts}" class='sidebar-link'> <i
+						data-feather="users" width="20"></i> <span>User Managements</span>
+				</a> <!-- <p th:text="${#httpServletRequest.getRequestURI()}"></p> -->
+				</li>
+
+				
+				</li>
+				<li class="sidebar-item "
+					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ibankusers') ? 'active':''}">
+					<a th:href="@{/ibankusers}" class='sidebar-link'> <i
+						data-feather="globe" width="20"></i> <span>iBank User</span>
+				</a>
+				</li>
+
+				<li class="sidebar-item "
+					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/devicemetadatas') ? 'active':''}">
+					<a th:href="@{/devicemetadatas}" class='sidebar-link'> <i
+						data-feather="monitor" width="20"></i> <span>Device Data</span>
+				</a>
+				</li>
+				<li class="sidebar-item "
+					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/requestqueues') ? 'active':''}">
+					<a th:href="@{/requestqueues}" class='sidebar-link'> <i
+						data-feather="figma" width="20"></i> <span>Request Queue</span>
+				</a>
+				</li>
+				<li class="sidebar-item "
+					th:classappend="${(#httpServletRequest.getRequestURI().startsWith('/apilogs') ? 'active':#httpServletRequest.getRequestURI().startsWith('/account-info') ? 'active':#httpServletRequest.getRequestURI().startsWith('/remitter-information') ? 'active':'') }">
+					<a th:href="@{/apilogs}" class='sidebar-link'> <i
+						data-feather="file-text" width="20"></i> <span>Reports</span>
+				</a> 
+				</li>
+			</ul>
+		</div>
+		<button class="sidebar-toggler btn x">
+			<i data-feather="x"></i>
+		</button>
+	</div>
+</div>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>New iBankUser</title>
+</head>
+
+<body>
+    <div layout:fragment="heading">
+        <h4>New iBank User Account</h4>
+    </div>
+    <div layout:fragment="content">
+        <div class="row mb-2">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form autocomplete="off" th:action="@{/ibankusers/save}" th:method="post" th:object="${ibankuser}">
+                                <div class="form-body row">
+                                    <div class="col-md-2">
+                                        <label>User Name</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" autocomplete="false" placeholder="iBank Full Name" id="ibankusername" name="fullName" th:field="*{fullName}">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="user"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="text-danger text-center text-subtitle" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Error!</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Mobile</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="tel" class="form-control" min="11" placeholder="Mobile Number" id="mobileNumber" name="mobileNumber" th:field="*{mobileNumber}">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="smartphone"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="text-danger text-center text-subtitle" th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}">Error!</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Password</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="password" class="form-control" placeholder="Password" id="password" name="password" th:field="*{password}" required>
+                                                <div class="form-control-icon">
+                                                    <i data-feather="lock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 text-info">
+                                        <i style="cursor: pointer;" data-feather="info" class="m-0 p-0 round" tabindex="1" data-bs-toggle="popover" data-bs-placement="right" title="Password Criteria" data-bs-content="Password must contain at least one digit,one lowercase char,one uppercase char,one symbol and minimum 8 character length"></i>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul class="text-danger" th:each="error: ${#fields.errors('password')}">
+                                            <li th:each="message : ${error.split(',')}">
+                                                <p class="error-message" th:text="${message}"></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Confirm Password</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+                                                <div class="form-control-icon">
+                                                    <i data-feather="key"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="text" class="form-control" placeholder="User Email" id="ibankUserEmail" name="ibankUserEmail" th:field="*{ibankUserEmail}" required>
+                                                <div class="form-control-icon">
+                                                    <i data-feather="mail"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="text-danger text-center text-subtitle" th:if="${#fields.hasErrors('ibankUserEmail')}" th:errors="*{ibankUserEmail}">Error!</div>
+                                    </div>
+                                    
+                                    <div class="col-md-2">
+                                        <label>NID</label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group has-icon-left">
+                                            <div class="position-relative">
+                                                <input type="tel" class="form-control" min="11" placeholder="NID" id="nid" name="nid" th:field="*{nid}">
+                                                <div class="form-control-icon">
+                                                    <i data-feather="credit-card"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="text-danger text-center text-subtitle" th:if="${#fields.hasErrors('nid')}" th:errors="*{nid}">Error!</div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-3">
+                                        <button type="submit" onclick="return validatePassword()" class="btn btn-success">Save</button>
+                                        <a th:href="@{/ibankUsers}" class="btn btn-primary mr-1"><i
+											data-feather="corner-down-left"></i> </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

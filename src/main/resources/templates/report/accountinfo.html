@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="dashboard/reports">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="shahadat hossain" />
+
+</head>
+
+<body>
+    <div layout:fragment="reports">
+        <form class="row mx-3 mb-1 border-bottom" th:action="@{/account-info}" th:method="get">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="basicInput">From Date</label> <input type="text" class="form-control datepicker"
+                        id="fromdate" name="fromDate" placeholder="From Date">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="basicInput">To Date</label> <input type="text" class="form-control datepicker"
+                        id="todate" name="toDate" placeholder="To Date">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="helperText">Username</label>
+                    <input type="text" id="todate" class="form-control" name="userName" placeholder="Username">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="helperText">&nbsp;</label>
+                    <button type="submit" id="todate" class="form-control btn btn-info">Search</button>
+                </div>
+            </div>
+        </form>
+        <div class="row mb-2 mt-2">
+            <div class="col-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-decoration-underline">Account Info Logs</h4>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-sm table-striped  table-bordered text-center datatable">
+                            <thead class="bg-info text-white ">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Account Number</th>
+                                    <th>Request By</th>
+                                    <th>Request At</th>
+                                    <th><i data-feather="zap"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <th:block th:each="listacinfo, iter : ${listacinfos}">
+                                    <tr>
+                                        <td>[[${iter.count}]]</td>
+                                        <td class=" text-left">[[${listacinfo.accountNo}]]</td>
+                                        <td>[[${listacinfo.jwtUserName}]]</td>
+                                        <td class=" text-right">[[${listacinfo.requestAt}]]</td>
+                                        <td><a class=" p-1 text-info"
+                                                th:href="@{/account-info/{id}(id = ${listacinfo.requestId})}">
+                                                <i data-feather="eye"></i>
+                                            </a></td>
+                                    </tr>
+                                </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

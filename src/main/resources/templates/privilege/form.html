@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>New Privilege</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <h1 th:if="${privilege.privId == null}">New Privilege</h1>
+        <h1 th:if="${privilege.privId != null}">Edit Privilege</h1>
+        <hr />
+        <form th:action="@{/privileges}" th:method="@{${privilege.privId == null} ? 'post' : 'put'}" th:object="${privilege}">
+            <input type="hidden" th:field="*{privId}" />
+
+            <div class="form-group">
+                <label for="entryAt">EntryAt</label>
+                <input id="entryAt" name="entryAt" type="text" class="form-control" th:field="*{entryAt}" />
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" class="form-control" th:field="*{name}" />
+            </div>
+            <div class="form-group">
+                <label for="userAccount">UserAccount</label>
+                <input id="userAccount" name="userAccount" type="text" class="form-control" th:field="*{userAccount}" />
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a th:href="@{/privileges}" class="btn btn-default">Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
