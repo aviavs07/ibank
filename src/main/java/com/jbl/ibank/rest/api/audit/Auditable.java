@@ -2,6 +2,8 @@ package com.jbl.ibank.rest.api.audit;
 
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -31,7 +33,7 @@ public abstract class Auditable {
 		
 	@Column(name = "created_date", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", updatable = false)
 	@CreatedDate
-	private Date createdDate;
+	private LocalDateTime createdDate;
 
 	@Column(name = "updated_by", updatable = true, columnDefinition = "integer default 0")
 	@LastModifiedBy

@@ -19,7 +19,12 @@
 				</a> <!-- <p th:text="${#httpServletRequest.getRequestURI()}"></p> -->
 				</li>
 
-				
+				<li class="sidebar-item "
+					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/jwtusers') ? 'active':''}">
+					<a th:href="@{/jwtusers}" class='sidebar-link'> <i
+						data-feather="user" width="20"></i> <span>JWT User</span>
+				</a>
+				</li>
 				</li>
 				<li class="sidebar-item "
 					th:classappend="${#httpServletRequest.getRequestURI().startsWith('/ibankusers') ? 'active':''}">

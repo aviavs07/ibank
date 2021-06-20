@@ -74,29 +74,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-5"></div>
-                                    <div class="col-md-2">
-                                        <label for="company">Company </label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group has-icon-left">
-                                            <div class="position-relative">
-                                                <select th:name="company" class="form-control" id="company" required>
-													<option value="">Select Company</option>
-													<option th:each="company : ${companies}"
-														th:value="${company.getCompanyId()}"
-														th:selected="${company.getCompanyId() eq current_companyId}"
-														th:text="${company.getCompanyName()}">Company
-														Name</option>
-												</select>
-                                                <div class="form-control-icon">
-                                                    <i data-feather="server"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="text-danger text-center text-subtitle" th:if="${#fields.hasErrors('company')}" th:errors="*{company}">Error!</div>
-                                    </div>
+                                    
 
                                     <div class="col-md-2">
                                         <label>Session Time</label>
@@ -112,22 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-5"></div>
-                                    <div class="col-md-2">
-                                        <label>Resource Services</label>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group has-icon-left">
-                                            <div class="position-relative">
-                                                <select th:name="resource[]" class="form-control" id="choices-multiple-remove-button" required placeholder="Select Resources" multiple data-live-search="true">
-													<option th:each="resource : ${resources}"
-														th:value="${resource.getResourceId()}"
-														th:text="${resource.getResourceName()}"></option>
-												</select>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5"></div>
+                                    
                                     <div class="col-md-2">
                                         <label>Whitelist IP</label>
                                     </div>

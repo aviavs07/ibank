@@ -8,7 +8,7 @@ import com.jbl.ibank.rest.api.model.ApiLog;
 import com.jbl.ibank.rest.api.repository.ApiLogRepository;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class ApiLogService {
 
 	@Autowired

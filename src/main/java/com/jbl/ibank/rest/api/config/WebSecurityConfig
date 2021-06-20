@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,26 +26,27 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	
-	// @Autowired
-    // UserDetailsService userDetailsService;
+	@Autowired
+    UserDetailsService userDetailsService;
 
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// configure AuthenticationManager so that it knows from where to load
-		// user for matching credentials
-		// Use BCryptPasswordEncoder
-		auth.userDetailsService(customUserDetailsService).passwordEncoder(getPasswordEncoder());
-	}
+    @Bean
+    public AuthenticationProvider authProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(customUserDetailsService);
+        provider.setPasswordEncoder(getPasswordEncoder());
+        
+        return provider;
+    }
 
-	
-	@Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
+    
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // auth.authenticationProvider(authenticationProvider);
+        auth.authenticationProvider(authProvider());
+    }
 
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -53,11 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/assets/**","/login*").permitAll()
                 .antMatchers("/**").hasAnyAuthority("ADMIN", "CREATOR", "VIEWER")
-				// .antMatchers("/api/token").permitAll()
                 .anyRequest().authenticated()
                 .and()
-				// exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-				// .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .formLogin()
                     .loginPage("/login")
                     .usernameParameter("username")
@@ -65,9 +64,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureHandler(loginFailureHandler)
                     .permitAll()
                 .and()
-				
                 .logout().logoutSuccessUrl("/login?logout").permitAll();
     }
+
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {

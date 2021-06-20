@@ -150,18 +150,18 @@ public class UserAccount extends Auditable implements Serializable {
 	@NotAudited
 	private List<Role> roles2;
 
-	@OneToMany(fetch = FetchType.LAZY) // ADD by Avijit
-	@JoinColumn(name = "created_by")
-	@NotAudited
-	private List<JwtUser> jwtUsers;
+	// @OneToMany(fetch = FetchType.LAZY) // ADD by Avijit
+	// @JoinColumn(name = "created_by")
+	// @NotAudited
+	// private List<JwtUser> jwtUsers;
 
 	public void addUserAccount(UserAccount theUserAccount) {
 		userAccounts.add(theUserAccount);
 	}
 
-	public void addJwtUser(JwtUser theJwtUser) {
-		jwtUsers.add(theJwtUser);
-	}
+	// public void addJwtUser(JwtUser theJwtUser) {
+	// 	jwtUsers.add(theJwtUser);
+	// }
 
 	public void addRoles(Role theRole) { // ADD by Avijit
 		this.roles.add(theRole);

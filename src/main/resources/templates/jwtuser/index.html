@@ -47,24 +47,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <th:block th:each="jwtWrappers : ${listJwtUser}">
+                                    <th:block th:each="jwtUser : ${jwtUsers}">
                                         <tr>
-                                            <td>[[${jwtWrappers.entity.username}]]</td>
-                                            <td>[[${jwtWrappers.entity.company.getCompanyName()}]]</td>
-                                            <td><i class="text-success " th:if="${jwtWrappers.entity.status}" data-feather="check"></i>
-                                                <i class="text-danger" th:unless="${jwtWrappers.entity.status == true}" data-feather="x"></i></td>
-                                            <td>[[${jwtWrappers.entity.resources}]]</td>
-                                            <td>[[${jwtWrappers.entity.basicToken}]]</td>
-                                            <td>[[${jwtWrappers.entity.whitelistIp}]]</td>
+                                            <td>[[${jwtUser.username}]]</td>
+                                            <td><i class="text-success " th:if="${jwtUser.status}" data-feather="check"></i>
+                                                <i class="text-danger" th:unless="${jwtUser.status == true}" data-feather="x"></i></td>
+                                          
+                                            <td>[[${jwtUser.basicToken}]]</td>
+                                            <td>[[${jwtUser.whitelistIp}]]</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a class=" p-1 text-info" th:href="@{/jwtusers/{id}(id = ${jwtWrappers.entity.jwtUserId})}">
+                                                    <a class=" p-1 text-info" th:href="@{/jwtusers/{id}(id = ${jwtUser.jwtUserId})}">
                                                         <i data-feather="eye"></i>
                                                     </a>
-                                                    <a sec:authorize="hasAnyAuthority('ADMIN')" class=" p-1 text-warning" th:href="@{/jwtusers/{id}/edit(id = ${jwtWrappers.entity.jwtUserId})}">
+                                                    <a sec:authorize="hasAnyAuthority('ADMIN')" class=" p-1 text-warning" th:href="@{/jwtusers/{id}/edit(id = ${jwtUser.jwtUserId})}">
                                                         <i data-feather="edit"></i>
                                                     </a>
-                                                    <a sec:authorize="hasAnyAuthority('ADMIN')" class=" p-1 text-success" th:href="@{/jwtusers/{id}/password(id = ${jwtWrappers.entity.jwtUserId})}">
+                                                    <a sec:authorize="hasAnyAuthority('ADMIN')" class=" p-1 text-success" th:href="@{/jwtusers/{id}/password(id = ${jwtUser.jwtUserId})}">
                                                         <i data-feather="lock"></i>
                                                     </a>
                                                 </div>
