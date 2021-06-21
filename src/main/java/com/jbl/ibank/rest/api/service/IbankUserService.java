@@ -34,6 +34,8 @@ public class IbankUserService {
 	public void delete(IbankUser entity) {
 		ibankUserRepository.delete(entity);
 	}
-
+	public IbankUser findByUserName(String userName) {
+		return ibankUserRepository.findByMobileNumber(userName);
+	}
  
 }

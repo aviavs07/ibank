@@ -16,16 +16,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.jbl.ibank.rest.api.service.CustomUserDetailsService;
-import com.jbl.ibank.rest.api.service.JwtUserDetailsService;
+import com.jbl.ibank.rest.api.service.IbankUserDetailsService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class IbankRequestFilter extends OncePerRequestFilter {
 
 	@Autowired
-	private JwtUserDetailsService jwtUserDetailsService;
+	private IbankUserDetailsService ibankUserDetailsService;
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
@@ -69,7 +69,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		// Once we get the token validate it.
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-			UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(username);
+			UserDetails userDetails = ibankUserDetailsService.loadUserByUsername(username);
 
 			// if token is valid configure Spring Security to manually set authentication
 			if (jwtTokenUtil.validateToken(jwtToken, userDetails) && userDetails.isEnabled()) {

@@ -1,6 +1,7 @@
 package com.jbl.ibank.rest.api.config;
 
 import com.jbl.ibank.rest.api.service.CustomUserDetailsService;
+import com.jbl.ibank.rest.api.service.IbankUserDetailsService;
 import com.jbl.ibank.rest.api.service.JwtUserDetailsService;
 import com.jbl.ibank.rest.api.utils.CustomLoginFailureHandler;
 import com.jbl.ibank.rest.api.utils.CustomLoginSuccessHandler;
@@ -78,6 +79,61 @@ public class MultiHttpSecurityConfig {
 
     @Order(1)
     @Configuration
+    public static class IbankWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+
+        @Autowired
+        private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+        @Autowired
+        private IbankUserDetailsService ibankUserDetailsService;
+
+       
+        @Autowired
+        private IbankRequestFilter ibankRequestFilter;
+
+        @Bean
+        public PasswordEncoder ibankPasswordEncoder() {
+            return new BCryptPasswordEncoder();
+        }
+
+        @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+            // configure AuthenticationManager so that it knows from where to load
+            // user for matching credentials
+            // Use BCryptPasswordEncoder
+            auth.userDetailsService(ibankUserDetailsService).passwordEncoder(ibankPasswordEncoder());
+        }
+
+        @Bean
+        @Override
+        public AuthenticationManager authenticationManager() throws Exception {
+            return super.authenticationManager();
+        }
+
+        @Override
+        protected void configure(HttpSecurity httpSecurity) throws Exception {
+            // We don't need CSRF for this example
+            httpSecurity.csrf().disable()
+                    // dont authenticate this particular request
+                    // .authorizeRequests().antMatchers("/employee").authenticated().//.authorizeRequests().antMatchers("/cbs/**").authenticated().
+
+                    // only allow authenticate request without access token
+                    .authorizeRequests().antMatchers("/ibank/token").permitAll().
+                    // all other requests need to be authenticated
+                    anyRequest().authenticated().and().
+                    // make sure we use stateless session; session won't be used to
+                    // store user's state.
+                    exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                    .and().sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            httpSecurity.headers().frameOptions().disable();
+            // Add a filter to validate the tokens with every request
+            httpSecurity.addFilterBefore(ibankRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        }
+    }
+
+    @Order(3)
+    @Configuration
     public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
         @Autowired
@@ -129,6 +185,4 @@ public class MultiHttpSecurityConfig {
             httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         }
     }
-
-    
 }
