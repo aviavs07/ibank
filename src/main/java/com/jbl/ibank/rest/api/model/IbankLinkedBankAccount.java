@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.jbl.ibank.rest.api.audit.Auditable;
 
@@ -37,7 +39,7 @@ public class IbankLinkedBankAccount extends Auditable implements Serializable {
     private int ibankLinkedBankAcId;
 
     @Column(name = "ibank_user_id", nullable = false)
-    private IbankUser ibankUserId;
+    private Integer ibankUserId;
 
     @Column(name = "account_number", length = 17)
     private String accountNumber;
@@ -46,8 +48,25 @@ public class IbankLinkedBankAccount extends Auditable implements Serializable {
     @NotBlank(message = "Name is Required!")
     private String accountName;
 
+    @Column(name = "mobile_number", length = 11)
+	@NotBlank(message="Please enter your mobile number")
+	@Size(min = 11, max = 11, message = "Mobile number must be 11 digit.")
+	@Pattern(regexp="(^$|[0][1][0-9]{9})", message = "Please enter valid mobile number." )
+	private String mobileNumber;
+
+    @Column(name = "nid", length = 20)
+    private String nid;
+
     @Column(name = "branch_id", nullable = false)
-    private BankBranch branchId;
+    private String branchId;
+    // private BankBranch branchId;
 
     private boolean status;
+
+   
+
+   
+
+
+    
 }

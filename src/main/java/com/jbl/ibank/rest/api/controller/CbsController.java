@@ -45,6 +45,7 @@ public class CbsController {
 	public ResponseEntity<?> accountInfo(@Valid @NotBlank @RequestParam Map<String, String> requestParams,
 			HttpServletRequest httpServletRequest) throws Exception {
 
+				
 		String accountNo = requestParams.get("accountNo");
 		Objects.requireNonNull(accountNo);
 
@@ -99,6 +100,7 @@ public class CbsController {
 						accountInfo.setValid(true);
 						accountInfo.setMessage(ResponseStatus.TWOZ0.getText());
 						accountInfo.setResponseCode(ResponseStatus.TWOZ0.getValue());
+						accountInfo.setBalance("0");
 						return ResponseEntity.status(HttpStatus.OK).body(accountInfo);
 					} else {
 						AccountInfoNotFound accountInfoNotFound = new AccountInfoNotFound(

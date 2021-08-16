@@ -10,6 +10,7 @@ public class AccountInfo {
 	private String accountTitle;
 	private String coCode;
 	private String coName;
+	private String balance;
 
 	public String getMessage() {
 		return message;
@@ -75,4 +76,11 @@ public class AccountInfo {
 		this.coName = coName;
 	}
 
+	public String getBalance() {
+		return balance;
+	}
+
+	public void setBalance(String balance) {
+		this.balance = balance;
+	}
 }
