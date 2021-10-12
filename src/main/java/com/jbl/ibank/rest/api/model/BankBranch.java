@@ -53,5 +53,6 @@ public class BankBranch extends Auditable implements Serializable{
     @Column(name = "address", length = 30)
 	private String address;
 
+    @Column(name = "status", length = 2, columnDefinition = "int default 1")
     private boolean status;
 }

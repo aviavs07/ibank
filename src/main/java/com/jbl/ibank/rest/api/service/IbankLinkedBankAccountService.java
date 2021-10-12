@@ -32,4 +32,10 @@ public class IbankLinkedBankAccountService {
 	public List<IbankLinkedBankAccount> findByMobileNumber(String mobileNumber) {
 		return ibankLinkedBankAccountRepository.findByMobileNumber(mobileNumber);
 	} 
+
+	public IbankLinkedBankAccount findByID(Integer id){
+		return ibankLinkedBankAccountRepository.getOne(id);
+	}
+
+
 }

@@ -66,10 +66,7 @@ public class CbsController {
 		TccUtility tccUtility = new TccUtility();
 
 		String requestOFS = "ENQUIRY.SELECT,,,E.JBL.API,ACCOUNT.NUMBER:EQ=" + accountNo;
-		// String requestOFS = "ENQUIRY.SELECT,,,E.JBL.API,ACCOUNT.NUMBER:EQ=" +
-		// accountNo;
-		// requestOFS = "ENQUIRY.SELECT,,MONWAR1/Ss1234567*,CURRENCY.LIST";
-		// ENQUIRY.SELECT,,MONWAR1/FFSEFDEEE,E.JBL.API,ACCOUNT.NUMBER = 0100001425310
+		
 
 		String responseData = tccUtility.sendRequest(requestOFS);
 		System.out.println("responseData " + responseData);
@@ -146,7 +143,7 @@ public class CbsController {
 		TccUtility tccUtility = new TccUtility();
 
 		String requestOFS = "ENQUIRY.SELECT,,,E.JBL.API.BAL.CHECK,ACCOUNT.NUMBER:EQ=" + accountNo;
-
+		
 		String responseData = tccUtility.sendRequest(requestOFS);
 		System.out.println("responseData " + responseData);
 
@@ -164,12 +161,12 @@ public class CbsController {
 				if (statusCode.equals("200")) {
 					CoveredAccountInfo coveredAccountInfo = new CoveredAccountInfo();
 					coveredAccountInfo.setAccountNo(accountNo);
-					coveredAccountInfo.setAccountTitle(secondPart[2]);
+					// coveredAccountInfo.setAccountTitle(secondPart[2]);
 					coveredAccountInfo.setAccountBalance(secondPart[3]);
-					coveredAccountInfo.setBranchCode(secondPart[4].replace("BD001", ""));
-					coveredAccountInfo.setBranchName(secondPart[5].replace("\"", ""));
-					coveredAccountInfo.setValid(true);
-					coveredAccountInfo.setMessage(ResponseStatus.TWOZ0.getText());
+					// coveredAccountInfo.setBranchCode(secondPart[4].replace("BD001", ""));
+					// coveredAccountInfo.setBranchName(secondPart[5].replace("\"", ""));
+					// coveredAccountInfo.setValid(true);
+					// coveredAccountInfo.setMessage(ResponseStatus.TWOZ0.getText());
 					coveredAccountInfo.setResponseCode(ResponseStatus.TWOZ0.getValue());
 					return ResponseEntity.status(HttpStatus.OK).body(coveredAccountInfo);
 				} else {
@@ -187,7 +184,7 @@ public class CbsController {
 
 	}
 
-	@RequestMapping(value = "/ft/frd", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/ft", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> FundTrasferFRD(@RequestBody RemitterInfo remitterInfo,
 			HttpServletRequest httpServletRequest) throws Exception {
 
